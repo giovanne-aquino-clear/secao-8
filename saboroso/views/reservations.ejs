@@ -1,17 +1,5 @@
-<!DOCTYPE HTML>
-<html>
-	<%- include("inc/head") -%>
+<%- include('inc/head-page') -%>
 
-	<body>
-		
-	<div class="gtco-loader"></div>
-	
-	<div id="page">
-
-	    <%- include('inc/header-menu') -%>
-		<%- include('inc/header') -%>
-
-	
 	
 	
 	<div class="gtco-section" style="padding-bottom: 14em;">
@@ -19,8 +7,11 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-6 animate-box">
-					<h3>Reserva de mesa</h3>
-                    <form action="#">
+                        <% if (typeof error === "string") {%>
+                    <div class="alert alert-danger "> <%= error%> </div>
+                            <% } %>
+                    <h3>Reserva de mesa</h3>
+                    <form action="/reservations" method="post">
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="inputName">Nome</label>
@@ -85,14 +76,4 @@
 		</div>
 	</div>
 
-    <%- include('inc/footer') -%>
-
-	</div>
-
-  <%- include('inc/footer-gototop') -%>
-	<%- include('inc/footer-scripts') -%>
-
-
-	</body>
-</html>
-
+    <%- include('inc/footer-page') -%>
