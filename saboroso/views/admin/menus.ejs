@@ -168,6 +168,32 @@
       }).catch(err=>{
         
       });
+      
+      [...document.querySelectorAll('.btn-delete')]. forEach(btn=>{
+          btn.addEventListener('click', e=>{
+
+            let tr = e.composedPath().find(el=>{
+              return (el.tagName.toUpperCase() === 'TR');
+            });
+            
+            let data = JSON.parse(tr.dataset.row);
+            
+            if(confirm(`Deseja excluir o menu ${data.title}`)){
+            console.log('data', data.id);
+
+            fetch(`/admin/menus/${data.id}`, {
+              method: 'DELETE'
+            })  
+              .then(response=> response.json())
+              .then(json=>{
+                console.log('json', json)
+
+                window.location.reload();
+              });
+            }
+          });
+
+      });
 
       [...document.querySelectorAll('.btn-update')].forEach(btn => {
         btn.addEventListener('click', e => {
