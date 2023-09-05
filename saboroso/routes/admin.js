@@ -3,9 +3,10 @@ var users = require("./../inc/users");
 var admin = require("./../inc/admin")
 var menus  = require("./../inc/menus");
 var reservations = require("./../inc/reservations");
+var moment = require("moment")
 var router = express.Router();
 
-
+moment.locale("pt-BR");
 /* GET users listing. */
 
 router.use(function(req, res, next){
@@ -116,13 +117,24 @@ router.delete("/menus/:id", function(req, res, next){
 
 router.get("/reservations", function(req, res, next) {
 
-  res.render("admin/reservations", admin.getParams(req,{date:{} }));
+  reservations.getReservations().then(data => {
+
+    res.render("admin/reservations", admin.getParams(req,{
+      date:{}, 
+      data,
+      moment
+    }));
+     });
+
   });
 
+  
+
 router.post("/reservations", function(req, res, next){
+  console.log('caiu em post')
 
     reservations.save(req.fields, req.files).then(results =>{
-  
+      console.log('caiu aq emmmm')
       res.send(results);
   
     }).catch(err=>{
