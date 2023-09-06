@@ -143,15 +143,14 @@ module.exports = {
 
                 query =
 
-                    `INSERT INTO tb_users (name  ,email,people,date,time)
-                VALUES(?,?,?,?,?)   
+                    `INSERT INTO tb_users (name  ,email,password,register)
+                VALUES(?,?,?,?)   
                `
                 params = [
                     fields.name,
                     fields.email,
-                    fields.people,
-                    fields.date,
-                    fields.time
+                    fields.password,
+                    new Date()
                 
                 ]
 

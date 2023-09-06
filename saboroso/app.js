@@ -14,9 +14,9 @@ var adminRouter = require('./routes/admin');
 var app = express();
 
 app.use((req, res, next)=> {
-
-  if (req.method.toLocaleLowerCase() === 'post' && req.url !== '/admin/login'){
-
+  
+  if (req.method.toLocaleLowerCase() === 'post'){
+    console.log('PARSING VAI SER FEITO')
     var form = new formidable.IncomingForm({
       uploadDir: path.join(__dirname, "/public/images"),
       keepExtensions: true
@@ -32,15 +32,19 @@ app.use((req, res, next)=> {
         files = files.photo[0]
 
       }
-
+      
       req.body = fields
       req.fields = fields
       req.files = files
+      console.log('Parsing feito')
+      console.log('Enviado', req.body, req.fields);
       next()
     })
+    
   } else {
     next()
   }
+  
 })
 
 // view engine setup
